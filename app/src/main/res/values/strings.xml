@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">My Car</string>
+    <string name="action_settings">Settings</string>
+    <string name="enter_vehicle_name">Enter vehicle name</string>
+    <string name="enter_vehicle_initial_run">Enter vehicle initial run</string>
+    <string name="enter_vehicle_current_run">Enter vehicle current run</string>
+    <string name="add">add</string>
+    <string name="cancel">Cancel</string>
+    <string name="add_vehicle">Add vehicle</string>
+</resources>
