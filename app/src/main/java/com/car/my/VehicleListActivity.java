@@ -4,9 +4,12 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
+import com.car.my.db.MyCarAppDbHelper;
 import com.car.my.entities.Vehicle;
+import com.car.my.factories.VehicleFactory;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -83,6 +86,13 @@ public class VehicleListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle_list);
+
+        // init db
+        final SQLiteDatabase db = new MyCarAppDbHelper(getApplicationContext()).getWritableDatabase();
+        if (db!=null){
+            Toast.makeText(getApplicationContext(),"DB CREATED",Toast.LENGTH_LONG).show();
+        }
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -106,7 +116,9 @@ public class VehicleListActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(VehicleListActivity.this,"added",Toast.LENGTH_LONG).show();
-                        vehicles.add(new Vehicle(1,name.getText().toString(),Long.parseLong(initialRun.getText().toString()),Long.parseLong(currentRun.getText().toString())));
+                        Vehicle v = new Vehicle(1,name.getText().toString(),Long.parseLong(initialRun.getText().toString()),Long.parseLong(currentRun.getText().toString()));
+                        vehicles.add(v);
+                        v.saveToDatabase(db);
                         dialog.dismiss();
 
                     }
@@ -126,17 +138,25 @@ public class VehicleListActivity extends AppCompatActivity {
 
             }
         });
-
+        vehicles = VehicleFactory.getAllFromDataBase(db);
+/*
         vehicles.add(new Vehicle(1, "Honda Shadow 1100", 6400, 25700));
         vehicles.add(new Vehicle(2, "Niva", 0, 1000));
         vehicles.add(new Vehicle(3, "Matiz", 0, 130000));
         vehicles.add(new Vehicle(3, "RF400", 0, 0));
+        */
+
+
+
+
 
 
         // init listview
         vehicleListAdapter = new VehicleListAdapter(this, vehicles);
         ListView vehicleListView = (ListView) findViewById(R.id.vehicle_list_view);
         vehicleListView.setAdapter(vehicleListAdapter);
+
+
     }
 
     @Override
