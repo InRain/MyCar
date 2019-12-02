@@ -35,4 +35,8 @@ public class Vehicle {
 
         db.insert(MyCarAppDbHelper.VEHICLES_TABLE_NAME,null,values);
     }
+
+    public long getId() {
+        return id;
+    }
 }
