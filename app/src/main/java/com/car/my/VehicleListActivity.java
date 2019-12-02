@@ -80,7 +80,6 @@ class VehicleListAdapter extends BaseAdapter {
 public class VehicleListActivity extends AppCompatActivity {
 
     private List<Vehicle> vehicles = new ArrayList<>();
-    private VehicleListAdapter vehicleListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,9 +104,9 @@ public class VehicleListActivity extends AppCompatActivity {
                 LayoutInflater dialogInflater = getLayoutInflater();
                 View layout = dialogInflater.inflate(R.layout.vehicle_add_dialog,(ViewGroup)findViewById(R.id.add_vehicle_root));
 
-                final EditText name = (EditText) layout.findViewById(R.id.vehicle_name);
-                final EditText initialRun = (EditText) layout.findViewById(R.id.vehicle_initial_run);
-                final EditText currentRun = (EditText) layout.findViewById(R.id.vehicle_current_run);
+                final EditText name = layout.findViewById(R.id.vehicle_name);
+                final EditText initialRun = layout.findViewById(R.id.vehicle_initial_run);
+                final EditText currentRun = layout.findViewById(R.id.vehicle_current_run);
 
 
                 addVehicleDialog.setTitle(R.string.add_vehicle);
@@ -152,7 +151,7 @@ public class VehicleListActivity extends AppCompatActivity {
 
 
         // init listview
-        vehicleListAdapter = new VehicleListAdapter(this, vehicles);
+        VehicleListAdapter vehicleListAdapter = new VehicleListAdapter(this, vehicles);
         ListView vehicleListView = (ListView) findViewById(R.id.vehicle_list_view);
         vehicleListView.setAdapter(vehicleListAdapter);
 
