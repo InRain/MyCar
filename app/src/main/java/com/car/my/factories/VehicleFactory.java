@@ -25,6 +25,6 @@ public class VehicleFactory {
             } while (cursor.moveToNext());
             return list;
         } else
-            return null;
+            return new ArrayList<>();
     }
 }

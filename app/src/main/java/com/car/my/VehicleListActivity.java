@@ -115,10 +115,20 @@ public class VehicleListActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(VehicleListActivity.this,"added",Toast.LENGTH_LONG).show();
-                        Vehicle v = new Vehicle(1,name.getText().toString(),Long.parseLong(initialRun.getText().toString()),Long.parseLong(currentRun.getText().toString()));
-                        vehicles.add(v);
-                        v.saveToDatabase(db);
-                        dialog.dismiss();
+                        long initialRunValue;
+                        long currentRunValue;
+                        try{
+                            initialRunValue = Long.parseLong(initialRun.getText().toString());
+                            currentRunValue = Long.parseLong(currentRun.getText().toString());
+                            Vehicle v = new Vehicle(1,name.getText().toString(),initialRunValue,currentRunValue);
+                            vehicles.add(v);
+                            v.saveToDatabase(db);
+                            dialog.dismiss();
+                        }catch (Exception e){
+                            Toast.makeText(getApplicationContext(),R.string.enter_valid_run_value,Toast.LENGTH_LONG).show();
+
+                        }
+
 
                     }
                 });

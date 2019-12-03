@@ -7,4 +7,5 @@
     <string name="add">add</string>
     <string name="cancel">Cancel</string>
     <string name="add_vehicle">Add vehicle</string>
+    <string name="enter_valid_run_value">Enter valid run value</string>
 </resources>
